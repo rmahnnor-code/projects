@@ -1,11 +1,12 @@
-# Projects
+# My Projects
 
-A collection of my C++ projects.
+A collection of my personal C++ projects.
 
-## Calculator
-A simple calculator built in C++.
+## Projects
 
-### How to run
-1. Clone the repo
-2. Open in your IDE
-3. Compile and run `calculator.cpp`
+| Project | Description |
+|---|---|
+| [Calculator](./calculator) | A simple calculator built in C++ |
+
+## Languages
+![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white)
