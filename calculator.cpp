@@ -57,26 +57,15 @@ class ScientificCalc
     {
         std::cout<<"enter prompt"<<std::endl;
         std::cin>>op >> num;
-        if(op != "root" && op != "Clog" && op != "cubert" && op != "sq")
-        {
-            std::cout<<"invalid operator"<<std::endl;
-        }
-        if(op == "root")
-        {
-           res = std::sqrt(num);
-        }
-        else if(op == "Clog")
-        {
-            res = log10(num);
-        }
-        else if(op == "cubert")
-        {
-            res = cbrt(num);
-        }
-        else if(op == "sq")
-        {
-            res = pow(num, 2);
-        }
+        if(op != "root" && op != "Clog" && op != "cubert" && op != "sq"){std::cout<<"invalid operator"<<std::endl;}
+
+        if(op == "root"){ res = std::sqrt(num); }
+
+        else if(op == "Clog"){ res = log10(num); }
+
+        else if(op == "cubert"){    res = cbrt(num);}
+
+        else if(op == "sq"){    res = pow(num, 2);}
 
         return res;
         
@@ -98,22 +87,16 @@ class HybridCalc : public SimpleCalc, public ScientificCalc
     {
         std::cout<<"choose mode: \n 1. S1mple                                 2. Scientific"<<std::endl;
         std::cin>>mode;
-        if(mode != 1 && mode != 2)
-        {
-            std::cout<<"invalid mode input"<<std::endl;
-        }
-        if(mode == 1)
-        {
+        if(mode != 1 && mode != 2){
+            std::cout<<"invalid mode input"<<std::endl;}
+        if(mode == 1){
             calc();
-            show();
-        }
-        else if(mode == 2)
-        {
+            show();}
+        else if(mode == 2){
             std::cout<<"info: \n log10 = Clog \n square = sq \n square root = root \n cube root  = cubert"<<std::endl;
             std::cout<<"prompt instructions \n prompt: \n <operator> <value>"<<std::endl;
             SciCalc();
-            showRes();
-        }
+            showRes();}
 
     }
 };
