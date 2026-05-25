@@ -19,22 +19,10 @@ class SimpleCalc
             return 0;
         }
 
-        if(op == '+')
-        {
-           res = num1 + num2;
-        }
-        else if(op == '-')
-        {
-            res = num1 - num2;
-        }
-        else if(op == '*')
-        {
-            res = num1 * num2;
-        }
-        else if(op == '/')
-        {
-            res = num1 / num2;
-        }
+        if(op == '+'){ res = num1 + num2;}
+        else if(op == '-'){ res = num1 - num2;}
+        else if(op == '*'){ res = num1 * num2;}
+        else if(op == '/'){ res = num1 / num2;}
         return res;
     }
 
