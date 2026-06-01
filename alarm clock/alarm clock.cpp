@@ -19,7 +19,7 @@ int main()
     SetTargetFPS(120);
     InitAudioDevice();
 
-    // Load textures
+    //textures
     Image img_bg;
     Texture2D txtu_bg;
     Set_Texture(img_bg, txtu_bg, 800, 600, "bg.png");
@@ -28,14 +28,14 @@ int main()
     Texture2D txtu_btn_settings;
     Set_Texture(img_btn, txtu_btn_settings, 70, 70, "add_button.png");
 
-    // Load custom font
+    //font
     Font customFont = LoadFontEx("Pricedown.otf", 100, 0, 0);
     SetTextureFilter(customFont.texture, TEXTURE_FILTER_BILINEAR);
 
-    // Load alarm sound (no looping field exists)
+    //alarm sound
     Sound alarmSound = LoadSound("alarm.wav");
 
-    // Main button (settings)
+    // Main button
     Rectangle btnSettings = { (800.0f - 70) / 2.0f, 600.0f - 120.0f, 70, 70 };
 
     // Time selection interface elements
@@ -66,7 +66,7 @@ int main()
     Rectangle btnBack = { 20, 20, 80, 30 };
     Rectangle btnSet = { 680, 530, 80, 30 };
 
-    // Stop alarm button (main screen when sounding)
+    // Stop alarm button 
     Rectangle btnStopAlarm = { 350, 350, 100, 40 };
 
     Screen currentScreen = MAIN;
@@ -77,7 +77,6 @@ int main()
     int alarmHour24 = 0;
     int alarmMinute = 0;
 
-    // Helper for drawing text with custom font
     auto DrawTextF = [&](const char* text, float x, float y, float fontSize, Color color)
     {
         DrawTextEx(customFont, text, {x, y}, fontSize, 1.0f, color);
@@ -87,7 +86,7 @@ int main()
     {
         Vector2 mouse = GetMousePosition();
 
-        // --- Alarm check ---
+        //Alarm check
         if (alarm_active && !alarm_sounding)
         {
             time_t now = time(0);
@@ -102,14 +101,13 @@ int main()
             }
         }
 
-        // Keep replaying the sound while alarm is sounding (for looping effect)
         if (alarm_sounding)
         {
             if (!IsSoundPlaying(alarmSound))
                 PlaySound(alarmSound);
         }
 
-        // --- Screen interactions ---
+        //Screen interactions
         if (currentScreen == MAIN)
         {
             if (CheckCollisionPointRec(mouse, btnSettings) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -188,7 +186,7 @@ int main()
                 isAM = false;
         }
 
-        // --- Drawing ---
+        //drawing
         BeginDrawing();
         ClearBackground(BEIGE);
 
