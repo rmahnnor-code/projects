@@ -78,7 +78,6 @@ void WindowMonitorPro()
                         }
                     }
                     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                    continue;
                 }
                 break;
             }
@@ -108,6 +107,10 @@ int main()
     Rectangle CheckBoxC = {100, 250, 20, 20};
     Rectangle CheckBoxI = {100, 300, 20, 20};
     Rectangle CheckBoxY = {600, 100, 20, 20};
+    Rectangle CheckBoxT = {600, 150 ,20, 20};
+    Rectangle CheckBoxN = {600, 200, 20, 20};
+    Rectangle CheckBoxEA = {600, 250, 20, 20};
+    Rectangle CheckBoxR = {600, 300, 20, 20};
     enum BUTTON_STATE
     {
         STATE_START,
@@ -130,7 +133,7 @@ int main()
     usc = FIRST_SCREEN;
     LOCK_STATE lsc;
     lsc = UNLOCKED;
-    bool CheckBoxState[7] = {false, false, false, false, false, false, false};
+    bool CheckBoxState[10] = {false, false, false, false, false, false, false, false, false, false};
     while (!WindowShouldClose())
     {
 
@@ -155,7 +158,7 @@ int main()
                 IsRunning = false;
                 lsc = LOCKED;
             }
-            if (GuiCheckBox(CheckBoxB, "Brave", &CheckBoxState[0]))
+            if (GuiCheckBox(CheckBoxB, "Brave(browser)", &CheckBoxState[0]))
             {
                 std::lock_guard<std::mutex> lock(mtxApps);
                 if (CheckBoxState[0])
@@ -245,6 +248,67 @@ int main()
                     TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"YouTube"), TargetApps.end());
                 }
             }
+            if (GuiCheckBox(CheckBoxT, "Twitch", &CheckBoxState[6]))
+            {
+                std::lock_guard<std::mutex> lock(mtxApps);
+                if (CheckBoxState[6])
+                {
+                    if (std::find(TargetApps.begin(), TargetApps.end(), L"Twitch") == TargetApps.end())
+                    {
+                        TargetApps.push_back(L"Twitch");
+                    }
+                }
+                else if (!CheckBoxState[6])
+                {
+                    TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"Twitch"), TargetApps.end());
+                }
+            }
+            if (GuiCheckBox(CheckBoxN, "Netflix", &CheckBoxState[7]))
+            {
+                std::lock_guard<std::mutex> lock(mtxApps);
+                if (CheckBoxState[7])
+                {
+                    if (std::find(TargetApps.begin(), TargetApps.end(), L"Netflix") == TargetApps.end())
+                    {
+                        TargetApps.push_back(L"Netflix");
+                    }
+                }
+                else if (!CheckBoxState[7])
+                {
+                    TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"Netflix"), TargetApps.end());
+                }
+            }
+            if (GuiCheckBox(CheckBoxEA, "EA", &CheckBoxState[8]))
+            {
+                std::lock_guard<std::mutex> lock(mtxApps);
+                if (CheckBoxState[8])
+                {
+                    if (std::find(TargetApps.begin(), TargetApps.end(), L"EA") == TargetApps.end())
+                    {
+                        TargetApps.push_back(L"EA");
+                    }
+                }
+                else if (!CheckBoxState[8])
+                {
+                    TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"EA"), TargetApps.end());
+                }
+            }
+            if (GuiCheckBox(CheckBoxR, "Riot", &CheckBoxState[9]))
+            {
+                std::lock_guard<std::mutex> lock(mtxApps);
+                if (CheckBoxState[9])
+                {
+                    if (std::find(TargetApps.begin(), TargetApps.end(), L"Riot") == TargetApps.end())
+                    {
+                        TargetApps.push_back(L"Riot");
+                    }
+                }
+                else if (!CheckBoxState[9])
+                {
+                    TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"Riot"), TargetApps.end());
+                }
+            }
+            
         }
         else if (usc == LOCK_INITIALIZED)
         {
