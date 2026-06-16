@@ -93,24 +93,26 @@ int main()
     std::thread window_monitor(WindowMonitorPro);
     InitWindow(800, 600, "LOCK IN");
     SetTargetFPS(60);
-    Font customFont = LoadFontEx("Pricedown.otf", 100, 0, 0);
+    Font customFont = LoadFontEx("Comfortaa-Light.otf", 100, 0, 0);
     GuiSetFont(customFont);
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 32);
-    Rectangle selectB = {300, 350, 200, 50};
-    Rectangle BackB = {50, 530, 100, 50};
-    Rectangle startB = {300, 470, 150, 50};
-    Rectangle stopB = {300, 350, 200, 50};
-    Rectangle MMB = {300, 250, 200, 50};
-    Rectangle CheckBoxS = {100, 100, 20, 20};
-    Rectangle CheckBoxB = {100, 150, 20, 20};
-    Rectangle CheckBoxD = {100, 200, 20, 20};
-    Rectangle CheckBoxC = {100, 250, 20, 20};
-    Rectangle CheckBoxI = {100, 300, 20, 20};
+    GuiSetStyle(DEFAULT, TEXT_PADDING, 10);
+    Rectangle selectB = {300, 350, 200, 25};
+    Rectangle BackB = {50, 530, 100, 25};
+    Rectangle startB = {600, 530, 100, 25};
+    Rectangle stopB = {300, 350, 100, 25};
+    Rectangle MMB = {300, 250, 200, 25};
+    Rectangle CheckBoxS = {50, 100, 20, 20};
+    Rectangle CheckBoxB = {50, 150, 20, 20};
+    Rectangle CheckBoxD = {50, 200, 20, 20};
+    Rectangle CheckBoxC = {50, 250, 20, 20};
+    Rectangle CheckBoxI = {50, 300, 20, 20};
     Rectangle CheckBoxY = {600, 100, 20, 20};
     Rectangle CheckBoxT = {600, 150 ,20, 20};
     Rectangle CheckBoxN = {600, 200, 20, 20};
-    Rectangle CheckBoxEA = {600, 250, 20, 20};
+    Rectangle CheckBoxE = {600, 250, 20, 20};
     Rectangle CheckBoxR = {600, 300, 20, 20};
+    Rectangle CATextBox = {300, 200, 150, 22};
+    Rectangle ADDB = {350, 222, 50, 22};
     enum BUTTON_STATE
     {
         STATE_START,
@@ -134,6 +136,8 @@ int main()
     LOCK_STATE lsc;
     lsc = UNLOCKED;
     bool CheckBoxState[10] = {false, false, false, false, false, false, false, false, false, false};
+    char TextMem[69] = "\0";
+    bool TextBoxEditMode = false;
     while (!WindowShouldClose())
     {
 
@@ -278,14 +282,14 @@ int main()
                     TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"Netflix"), TargetApps.end());
                 }
             }
-            if (GuiCheckBox(CheckBoxEA, "EA", &CheckBoxState[8]))
+            if (GuiCheckBox(CheckBoxE, "Epic Games", &CheckBoxState[8]))
             {
                 std::lock_guard<std::mutex> lock(mtxApps);
                 if (CheckBoxState[8])
                 {
-                    if (std::find(TargetApps.begin(), TargetApps.end(), L"EA") == TargetApps.end())
+                    if (std::find(TargetApps.begin(), TargetApps.end(), L"Epic Games") == TargetApps.end())
                     {
-                        TargetApps.push_back(L"EA");
+                        TargetApps.push_back(L"Epic Games");
                     }
                 }
                 else if (!CheckBoxState[8])
@@ -307,6 +311,26 @@ int main()
                 {
                     TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"Riot"), TargetApps.end());
                 }
+            }
+
+            //textfield
+            if(GuiTextBox(CATextBox, TextMem, 64, TextBoxEditMode))
+            {
+                TextBoxEditMode = !TextBoxEditMode;
+            }
+            if(GuiButton(ADDB, "ADD"))
+            {
+                if(TextMem[0] != '\0')
+                {
+                    std::string tempstr(TextMem);
+                    std::wstring wstrCA(tempstr.begin(),tempstr.end());
+                    std::lock_guard<std::mutex> lock(mtxApps);
+                    if(std::find(TargetApps.begin(),TargetApps.end(), wstrCA) == TargetApps.end())
+                    {
+                        TargetApps.push_back(wstrCA);
+                    }
+                }
+                TextMem[0] = '\0';
             }
             
         }
