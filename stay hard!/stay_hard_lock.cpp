@@ -93,9 +93,10 @@ int main()
     std::thread window_monitor(WindowMonitorPro);
     InitWindow(800, 600, "LOCK IN");
     SetTargetFPS(60);
-    Font customFont = LoadFontEx("Comfortaa-Light.otf", 100, 0, 0);
+    Font customFont = LoadFontEx("Comfortaa-Bold.ttf", 20, 0, 0);
     GuiSetFont(customFont);
-    GuiSetStyle(DEFAULT, TEXT_PADDING, 10);
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
+    GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
     Rectangle selectB = {300, 350, 200, 25};
     Rectangle BackB = {50, 530, 100, 25};
     Rectangle startB = {600, 530, 100, 25};
@@ -112,7 +113,7 @@ int main()
     Rectangle CheckBoxE = {600, 250, 20, 20};
     Rectangle CheckBoxR = {600, 300, 20, 20};
     Rectangle CATextBox = {300, 200, 150, 22};
-    Rectangle ADDB = {350, 222, 50, 22};
+    Rectangle ADDB = {350, 230, 60, 25};
     enum BUTTON_STATE
     {
         STATE_START,
