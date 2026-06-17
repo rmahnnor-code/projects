@@ -88,6 +88,14 @@ void WindowMonitorPro()
     }
 }
 
+Texture2D Set_Texture(Image &img, Texture2D &texture, int height, int width, const char *filename)
+{
+    img = LoadImage(filename);
+    ImageResize(&img, width, height);
+    texture = LoadTextureFromImage(img);
+    return texture;
+}
+
 int main()
 {
     std::thread window_monitor(WindowMonitorPro);
@@ -97,10 +105,13 @@ int main()
     GuiSetFont(customFont);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
     GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
+    Image BgImg;
+    Texture2D BgTx;
+    Set_Texture(BgImg, BgTx, 600, 800, "BG4.png");
     Rectangle selectB = {300, 350, 200, 25};
     Rectangle BackB = {50, 530, 100, 25};
     Rectangle startB = {600, 530, 100, 25};
-    Rectangle stopB = {300, 350, 100, 25};
+    Rectangle stopB = {350, 350, 100, 25};
     Rectangle MMB = {300, 250, 200, 25};
     Rectangle CheckBoxS = {50, 100, 20, 20};
     Rectangle CheckBoxB = {50, 150, 20, 20};
@@ -144,6 +155,7 @@ int main()
 
         BeginDrawing();
         ClearBackground(BLACK);
+        DrawTexture(BgTx, 0, 0, WHITE);
         if (usc == FIRST_SCREEN)
         {
             if (GuiButton(selectB, "Select APPs"))
