@@ -105,16 +105,19 @@ int main()
     GuiSetFont(customFont);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
     GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
-    Image BgImg;
-    Texture2D BgTx;
-    Set_Texture(BgImg, BgTx, 600, 800, "BG4.png");
-    Rectangle selectB = {300, 350, 200, 25};
+    Image BgImg ,BImg, CBImg, CBCImg;
+    Texture2D BgTx ,BTx, CBTx, CBCTx;
+    Set_Texture(BgImg, BgTx, 600, 800, "BG3.png");
+    Set_Texture(BImg, BTx, 100, 220, "button3.png");
+    Set_Texture(CBImg, CBTx, 20, 20, "CheckBox2.png");
+    Set_Texture(CBCImg , CBCTx, 20, 20, "CheckBoxChecked2.png");
+    Rectangle selectB = {321, 363, 172.5, 70};
     Rectangle BackB = {50, 530, 100, 25};
     Rectangle startB = {600, 530, 100, 25};
     Rectangle stopB = {350, 350, 100, 25};
     Rectangle MMB = {300, 250, 200, 25};
-    Rectangle CheckBoxS = {50, 100, 20, 20};
-    Rectangle CheckBoxB = {50, 150, 20, 20};
+    Rectangle CheckBoxB = {50, 100, 20, 20};
+    Rectangle CheckBoxS = {50, 150, 20, 20};
     Rectangle CheckBoxD = {50, 200, 20, 20};
     Rectangle CheckBoxC = {50, 250, 20, 20};
     Rectangle CheckBoxI = {50, 300, 20, 20};
@@ -345,7 +348,6 @@ int main()
                 }
                 TextMem[0] = '\0';
             }
-            
         }
         else if (usc == LOCK_INITIALIZED)
         {
@@ -364,6 +366,23 @@ int main()
                     usc = FIRST_SCREEN;
                 }
             }
+        }
+        if(usc == FIRST_SCREEN)
+        {
+            DrawTexture(BTx, 300, 345, WHITE);
+        }
+        if(usc  == APP_SELECTION)
+        {
+            DrawTexture(CheckBoxState[0] ? CBCTx : CBTx , 50 , 100 , WHITE);
+            DrawTexture(CheckBoxState[1] ? CBCTx : CBTx , 50 , 150 , WHITE);
+            DrawTexture(CheckBoxState[2] ? CBCTx : CBTx , 50 , 200 , WHITE);
+            DrawTexture(CheckBoxState[3] ? CBCTx : CBTx , 50 , 250 , WHITE);
+            DrawTexture(CheckBoxState[4] ? CBCTx : CBTx , 50 , 300 , WHITE);
+            DrawTexture(CheckBoxState[5] ? CBCTx : CBTx , 600 , 100 , WHITE);
+            DrawTexture(CheckBoxState[6] ? CBCTx : CBTx , 600 , 150 , WHITE);
+            DrawTexture(CheckBoxState[7] ? CBCTx : CBTx , 600 , 200 , WHITE);
+            DrawTexture(CheckBoxState[8] ? CBCTx : CBTx , 600 , 250 , WHITE);
+            DrawTexture(CheckBoxState[9] ? CBCTx : CBTx , 600 , 300 , WHITE);
         }
         EndDrawing();
     }
