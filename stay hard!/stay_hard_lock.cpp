@@ -105,15 +105,17 @@ int main()
     GuiSetFont(customFont);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
     GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
-    Image BgImg ,BImg, CBImg, CBCImg;
-    Texture2D BgTx ,BTx, CBTx, CBCTx;
+    Image BgImg, BSImg, CBImg, CBCImg, BBImg, BAImg;
+    Texture2D BgTx, BSTx, CBTx, CBCTx, BBTx, BATx;
     Set_Texture(BgImg, BgTx, 600, 800, "BG3.png");
-    Set_Texture(BImg, BTx, 100, 220, "button3.png");
+    Set_Texture(BSImg, BSTx, 100, 220, "button3.png");
     Set_Texture(CBImg, CBTx, 20, 20, "CheckBox2.png");
-    Set_Texture(CBCImg , CBCTx, 20, 20, "CheckBoxChecked2.png");
+    Set_Texture(CBCImg, CBCTx, 20, 20, "CheckBoxChecked2.png");
+    Set_Texture(BBImg, BBTx, 90, 148, "button3.png");
+    Set_Texture(BAImg, BATx, 34, 74, "button3.png");
     Rectangle selectB = {321, 363, 172.5, 70};
-    Rectangle BackB = {50, 530, 100, 25};
-    Rectangle startB = {600, 530, 100, 25};
+    Rectangle BackB = {44, 498, 114, 62};
+    Rectangle startB = {644, 498, 114, 62};
     Rectangle stopB = {350, 350, 100, 25};
     Rectangle MMB = {300, 250, 200, 25};
     Rectangle CheckBoxB = {50, 100, 20, 20};
@@ -122,12 +124,12 @@ int main()
     Rectangle CheckBoxC = {50, 250, 20, 20};
     Rectangle CheckBoxI = {50, 300, 20, 20};
     Rectangle CheckBoxY = {600, 100, 20, 20};
-    Rectangle CheckBoxT = {600, 150 ,20, 20};
+    Rectangle CheckBoxT = {600, 150, 20, 20};
     Rectangle CheckBoxN = {600, 200, 20, 20};
     Rectangle CheckBoxE = {600, 250, 20, 20};
     Rectangle CheckBoxR = {600, 300, 20, 20};
-    Rectangle CATextBox = {300, 200, 150, 22};
-    Rectangle ADDB = {350, 230, 60, 25};
+    Rectangle CATextBox = {300, 400, 150, 25};
+    Rectangle ADDB = {450, 400, 60, 25};
     enum BUTTON_STATE
     {
         STATE_START,
@@ -328,20 +330,14 @@ int main()
                     TargetApps.erase(std::remove(TargetApps.begin(), TargetApps.end(), L"Riot"), TargetApps.end());
                 }
             }
-
-            //textfield
-            if(GuiTextBox(CATextBox, TextMem, 64, TextBoxEditMode))
+            if (GuiButton(ADDB, "ADD"))
             {
-                TextBoxEditMode = !TextBoxEditMode;
-            }
-            if(GuiButton(ADDB, "ADD"))
-            {
-                if(TextMem[0] != '\0')
+                if (TextMem[0] != '\0')
                 {
                     std::string tempstr(TextMem);
-                    std::wstring wstrCA(tempstr.begin(),tempstr.end());
+                    std::wstring wstrCA(tempstr.begin(), tempstr.end());
                     std::lock_guard<std::mutex> lock(mtxApps);
-                    if(std::find(TargetApps.begin(),TargetApps.end(), wstrCA) == TargetApps.end())
+                    if (std::find(TargetApps.begin(), TargetApps.end(), wstrCA) == TargetApps.end())
                     {
                         TargetApps.push_back(wstrCA);
                     }
@@ -367,22 +363,29 @@ int main()
                 }
             }
         }
-        if(usc == FIRST_SCREEN)
+        if (usc == FIRST_SCREEN)
         {
-            DrawTexture(BTx, 300, 345, WHITE);
+            DrawTexture(BSTx, 300, 345, WHITE);
         }
-        if(usc  == APP_SELECTION)
+        if (usc == APP_SELECTION)
         {
-            DrawTexture(CheckBoxState[0] ? CBCTx : CBTx , 50 , 100 , WHITE);
-            DrawTexture(CheckBoxState[1] ? CBCTx : CBTx , 50 , 150 , WHITE);
-            DrawTexture(CheckBoxState[2] ? CBCTx : CBTx , 50 , 200 , WHITE);
-            DrawTexture(CheckBoxState[3] ? CBCTx : CBTx , 50 , 250 , WHITE);
-            DrawTexture(CheckBoxState[4] ? CBCTx : CBTx , 50 , 300 , WHITE);
-            DrawTexture(CheckBoxState[5] ? CBCTx : CBTx , 600 , 100 , WHITE);
-            DrawTexture(CheckBoxState[6] ? CBCTx : CBTx , 600 , 150 , WHITE);
-            DrawTexture(CheckBoxState[7] ? CBCTx : CBTx , 600 , 200 , WHITE);
-            DrawTexture(CheckBoxState[8] ? CBCTx : CBTx , 600 , 250 , WHITE);
-            DrawTexture(CheckBoxState[9] ? CBCTx : CBTx , 600 , 300 , WHITE);
+            DrawTexture(CheckBoxState[0] ? CBCTx : CBTx, 50, 100, WHITE);
+            DrawTexture(CheckBoxState[1] ? CBCTx : CBTx, 50, 150, WHITE);
+            DrawTexture(CheckBoxState[2] ? CBCTx : CBTx, 50, 200, WHITE);
+            DrawTexture(CheckBoxState[3] ? CBCTx : CBTx, 50, 250, WHITE);
+            DrawTexture(CheckBoxState[4] ? CBCTx : CBTx, 50, 300, WHITE);
+            DrawTexture(CheckBoxState[5] ? CBCTx : CBTx, 600, 100, WHITE);
+            DrawTexture(CheckBoxState[6] ? CBCTx : CBTx, 600, 150, WHITE);
+            DrawTexture(CheckBoxState[7] ? CBCTx : CBTx, 600, 200, WHITE);
+            DrawTexture(CheckBoxState[8] ? CBCTx : CBTx, 600, 250, WHITE);
+            DrawTexture(CheckBoxState[9] ? CBCTx : CBTx, 600, 300, WHITE);
+            DrawTexture(BBTx, 29, 482, WHITE);
+            DrawTexture(BBTx, 629, 482, WHITE);
+            if (GuiTextBox(CATextBox, TextMem, 64, TextBoxEditMode))
+            {
+                TextBoxEditMode = !TextBoxEditMode;
+            }
+            DrawTexture(BATx, 444, 395, WHITE);
         }
         EndDrawing();
     }
