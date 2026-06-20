@@ -116,8 +116,8 @@ int main()
     Rectangle selectB = {321, 363, 172.5, 70};
     Rectangle BackB = {44, 498, 114, 62};
     Rectangle startB = {644, 498, 114, 62};
-    Rectangle stopB = {350, 350, 100, 25};
-    Rectangle MMB = {300, 250, 200, 25};
+    Rectangle stopB = {330, 200, 170, 70};
+    Rectangle MMB = {390, 360, 60, 60};
     Rectangle CheckBoxB = {50, 100, 20, 20};
     Rectangle CheckBoxS = {50, 150, 20, 20};
     Rectangle CheckBoxD = {50, 200, 20, 20};
@@ -354,12 +354,12 @@ int main()
                     IsRunning = true;
                     lsc = UNLOCKED;
                 }
-            }
-            if (lsc == UNLOCKED)
-            {
                 if (GuiButton(MMB, "Main Menu"))
                 {
-                    usc = FIRST_SCREEN;
+                    if(lsc == UNLOCKED)
+                    {
+                        usc = FIRST_SCREEN;
+                    }
                 }
             }
         }
