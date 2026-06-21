@@ -105,20 +105,21 @@ int main()
     GuiSetFont(customFont);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
     GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
-    Image Img[7];
-    Texture2D Tx[7];
+    Image Img[9];
+    Texture2D Tx[9];
     Set_Texture(Img[0], Tx[0], 600, 800, "BG3.png");
     Set_Texture(Img[1], Tx[1], 100, 220, "button3.png");
     Set_Texture(Img[2], Tx[2], 20, 20, "CheckBox2.png");
     Set_Texture(Img[3], Tx[3], 20, 20, "CheckBoxChecked2.png");
     Set_Texture(Img[4], Tx[4], 90, 148, "button3.png");
     Set_Texture(Img[5], Tx[5], 34, 74, "button3.png");
-    Set_Texture(Img[6], Tx[6], 90, 148, "button3.png");
+    Set_Texture(Img[6], Tx[6], 85, 85, "button3.png");
+    Set_Texture(Img[7], Tx[7], 100, 218, "button3.png");
     Rectangle selectB = {321, 363, 172.5, 70};
     Rectangle BackB = {44, 498, 114, 62};
     Rectangle startB = {644, 498, 114, 62};
     Rectangle stopB = {330, 363, 170, 70};
-    Rectangle MMB = {20, 20, 60, 60};
+    Rectangle MMB = {19, 20, 61, 61};
     Rectangle CheckBoxB = {50, 100, 20, 20};
     Rectangle CheckBoxS = {50, 150, 20, 20};
     Rectangle CheckBoxD = {50, 200, 20, 20};
@@ -350,13 +351,13 @@ int main()
                 }
                 TextMem[0] = '\0';
             }
-            if(GuiButton(CLB, "Clear"))
+            if (GuiButton(CLB, "Clear"))
             {
                 std::lock_guard<std::mutex> lock(mtxApps);
-                if(!TargetApps.empty())
+                if (!TargetApps.empty())
                 {
                     TargetApps.clear();
-                    for(int i = 0; i < 10; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         CheckBoxState[i] = false;
                     }
@@ -405,6 +406,14 @@ int main()
                 TextBoxEditMode = !TextBoxEditMode;
             }
             DrawTexture(Tx[5], 444, 395, WHITE);
+        }
+        if (usc == LOCK_INITIALIZED)
+        {
+            DrawTexture(Tx[6], 8, 6, WHITE);
+            if (lsc == LOCKED)
+            {
+                DrawTexture(Tx[7], 309, 345, WHITE);
+            }
         }
         EndDrawing();
     }
