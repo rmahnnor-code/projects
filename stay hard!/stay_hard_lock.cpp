@@ -101,20 +101,25 @@ int main()
     std::thread window_monitor(WindowMonitorPro);
     InitWindow(800, 600, "LOCK IN");
     SetTargetFPS(60);
-    Font customFont = LoadFontEx("Comfortaa-Bold.ttf", 20, 0, 0);
-    GuiSetFont(customFont);
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
-    GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
+    Font font[7];
+    font[0] = LoadFontEx("assets/Restful_Silent.ttf", 130, 0, 0);
+    font[1] = LoadFontEx("assets/AUGUSTUS.ttf", 21, 0, 0);
+    font[2] = LoadFontEx("assets/AUGUSTUS.ttf", 30, 0, 0);
+    font[3] = LoadFontEx("assets/Restful_Silent.ttf", 20, 0, 0);
+    font[4] = LoadFontEx("assets/AUGUSTUS.ttf", 20, 0 ,0);
     Image Img[9];
     Texture2D Tx[9];
-    Set_Texture(Img[0], Tx[0], 600, 800, "BG3.png");
-    Set_Texture(Img[1], Tx[1], 100, 220, "button3.png");
-    Set_Texture(Img[2], Tx[2], 20, 20, "CheckBox2.png");
-    Set_Texture(Img[3], Tx[3], 20, 20, "CheckBoxChecked2.png");
-    Set_Texture(Img[4], Tx[4], 90, 148, "button3.png");
-    Set_Texture(Img[5], Tx[5], 34, 74, "button3.png");
-    Set_Texture(Img[6], Tx[6], 85, 85, "button3.png");
-    Set_Texture(Img[7], Tx[7], 100, 218, "button3.png");
+    GuiSetFont(font[3]);
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
+    GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
+    Set_Texture(Img[0], Tx[0], 600, 800, "assets/BG3.png");
+    Set_Texture(Img[1], Tx[1], 100, 220, "assets/button3.png");
+    Set_Texture(Img[2], Tx[2], 20, 20, "assets/CheckBox2.png");
+    Set_Texture(Img[3], Tx[3], 20, 20, "assets/CheckBoxChecked2.png");
+    Set_Texture(Img[4], Tx[4], 90, 148, "assets/button3.png");
+    Set_Texture(Img[5], Tx[5], 34, 74, "assets/button3.png");
+    Set_Texture(Img[6], Tx[6], 85, 85, "assets/button3.png");
+    Set_Texture(Img[7], Tx[7], 100, 218, "assets/button3.png");
     Rectangle selectB = {321, 363, 172.5, 70};
     Rectangle BackB = {44, 498, 114, 62};
     Rectangle startB = {644, 498, 114, 62};
@@ -384,7 +389,9 @@ int main()
         }
         if (usc == FIRST_SCREEN)
         {
+            DrawTextEx(font[0], "LOCK TF IN", {140, 100}, 130, 5, WHITE);
             DrawTexture(Tx[1], 300, 345, WHITE);
+            DrawTextEx(font[1], "SELECT APPS", {325, 385}, 21, 3, BLACK);
         }
         if (usc == APP_SELECTION)
         {
@@ -406,6 +413,10 @@ int main()
                 TextBoxEditMode = !TextBoxEditMode;
             }
             DrawTexture(Tx[5], 444, 395, WHITE);
+            DrawTextEx(font[2], "BACK", {53, 515}, 30, 3, BLACK);
+            DrawTextEx(font[2], "LOCK", {654, 515}, 30, 3, BLACK);
+            DrawTextEx(font[2], "CLEAR", {350, 515}, 30, 3, BLACK);
+            DrawTextEx(font[4], "ADD", {455, 405}, 20, 2, BLACK);
         }
         if (usc == LOCK_INITIALIZED)
         {
@@ -413,6 +424,7 @@ int main()
             if (lsc == LOCKED)
             {
                 DrawTexture(Tx[7], 309, 345, WHITE);
+                DrawTextEx(font[2], "UNLOCK", {336, 380}, 30, 3, BLACK);
             }
         }
         EndDrawing();
