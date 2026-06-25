@@ -101,25 +101,45 @@ int main()
     std::thread window_monitor(WindowMonitorPro);
     InitWindow(800, 600, "LOCK IN");
     SetTargetFPS(60);
-    Font font[7];
-    font[0] = LoadFontEx("assets/Restful_Silent.ttf", 130, 0, 0);
-    font[1] = LoadFontEx("assets/AUGUSTUS.ttf", 21, 0, 0);
-    font[2] = LoadFontEx("assets/AUGUSTUS.ttf", 30, 0, 0);
-    font[3] = LoadFontEx("assets/Restful_Silent.ttf", 20, 0, 0);
-    font[4] = LoadFontEx("assets/AUGUSTUS.ttf", 20, 0 ,0);
-    Image Img[9];
-    Texture2D Tx[9];
+
+    //fonts
+    Font font[6];
+    font[0] = LoadFontEx("assets/Font/Restful_Silent.ttf", 130, 0, 0);
+    font[1] = LoadFontEx("assets/Font/AUGUSTUS.ttf", 21, 0, 0);
+    font[2] = LoadFontEx("assets/Font/AUGUSTUS.ttf", 30, 0, 0);
+    font[3] = LoadFontEx("assets/Font/Restful_Silent.ttf", 20, 0, 0);
+    font[4] = LoadFontEx("assets/Font/AUGUSTUS.ttf", 20, 0 ,0);
+    font[5] = LoadFontEx("assets/Font/AUGUSTUS.ttf", 17, 0 ,0);
+    Image Img[20];
+    Texture2D Tx[20];
     GuiSetFont(font[3]);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
     GuiSetStyle(DEFAULT, TEXT_PADDING, 4);
-    Set_Texture(Img[0], Tx[0], 600, 800, "assets/BG3.png");
-    Set_Texture(Img[1], Tx[1], 100, 220, "assets/button3.png");
-    Set_Texture(Img[2], Tx[2], 20, 20, "assets/CheckBox2.png");
-    Set_Texture(Img[3], Tx[3], 20, 20, "assets/CheckBoxChecked2.png");
-    Set_Texture(Img[4], Tx[4], 90, 148, "assets/button3.png");
-    Set_Texture(Img[5], Tx[5], 34, 74, "assets/button3.png");
-    Set_Texture(Img[6], Tx[6], 85, 85, "assets/button3.png");
-    Set_Texture(Img[7], Tx[7], 100, 218, "assets/button3.png");
+
+    //assets textures
+    Set_Texture(Img[0], Tx[0], 600, 800, "assets/Textures/BG3.png");
+    Set_Texture(Img[1], Tx[1], 100, 220, "assets/Textures/button3.png");
+    Set_Texture(Img[2], Tx[2], 20, 20, "assets/Textures/CheckBox2.png");
+    Set_Texture(Img[3], Tx[3], 20, 20, "assets/Textures/CheckBoxChecked2.png");
+    Set_Texture(Img[4], Tx[4], 90, 148, "assets/Textures/button3.png");
+    Set_Texture(Img[5], Tx[5], 34, 74, "assets/Textures/button3.png");
+    Set_Texture(Img[6], Tx[6], 85, 85, "assets/Textures/button3.png");
+    Set_Texture(Img[7], Tx[7], 100, 218, "assets/Textures/button3.png");
+    Set_Texture(Img[8], Tx[8], 40, 40, "assets/Textures/HomeIcon.png");
+
+    //icons textures
+    Set_Texture(Img[9], Tx[9], 100, 100, "assets/ICONS/BI.png");
+    Set_Texture(Img[10], Tx[10], 40, 40, "assets/ICONS/SI.png");
+    Set_Texture(Img[11], Tx[11], 40, 40, "assets/ICONS/DI.png");
+    Set_Texture(Img[12], Tx[12], 40, 40, "assets/ICONS/GI.png");
+    Set_Texture(Img[13], Tx[13], 40, 40, "assets/ICONS/II.png");
+    Set_Texture(Img[14], Tx[14], 40, 40, "assets/ICONS/YI.png");
+    Set_Texture(Img[15], Tx[15], 40, 40, "assets/ICONS/TI.png");
+    Set_Texture(Img[16], Tx[16], 40, 40, "assets/ICONS/NI.png");
+    Set_Texture(Img[17], Tx[17], 40, 40, "assets/ICONS/EI.png");
+    Set_Texture(Img[18], Tx[18], 40, 40, "assets/ICONS/RI.png");
+
+    //GUI elements
     Rectangle selectB = {321, 363, 172.5, 70};
     Rectangle BackB = {44, 498, 114, 62};
     Rectangle startB = {644, 498, 114, 62};
@@ -130,11 +150,11 @@ int main()
     Rectangle CheckBoxD = {50, 200, 20, 20};
     Rectangle CheckBoxC = {50, 250, 20, 20};
     Rectangle CheckBoxI = {50, 300, 20, 20};
-    Rectangle CheckBoxY = {600, 100, 20, 20};
-    Rectangle CheckBoxT = {600, 150, 20, 20};
-    Rectangle CheckBoxN = {600, 200, 20, 20};
-    Rectangle CheckBoxE = {600, 250, 20, 20};
-    Rectangle CheckBoxR = {600, 300, 20, 20};
+    Rectangle CheckBoxY = {730, 100, 20, 20};
+    Rectangle CheckBoxT = {730, 150, 20, 20};
+    Rectangle CheckBoxN = {730, 200, 20, 20};
+    Rectangle CheckBoxE = {730, 250, 20, 20};
+    Rectangle CheckBoxR = {730, 300, 20, 20};
     Rectangle CATextBox = {300, 400, 150, 25};
     Rectangle ADDB = {450, 400, 60, 25};
     Rectangle CLB = {350, 498, 114, 62};
@@ -168,7 +188,6 @@ int main()
 
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawTexture(Tx[0], 0, 0, WHITE);
         if (usc == FIRST_SCREEN)
         {
             if (GuiButton(selectB, "Select APPs"))
@@ -387,6 +406,7 @@ int main()
                 }
             }
         }
+        DrawTexture(Tx[0], 0, 0, WHITE);
         if (usc == FIRST_SCREEN)
         {
             DrawTextEx(font[0], "LOCK TF IN", {140, 100}, 130, 5, WHITE);
@@ -400,14 +420,16 @@ int main()
             DrawTexture(CheckBoxState[2] ? Tx[3] : Tx[2], 50, 200, WHITE);
             DrawTexture(CheckBoxState[3] ? Tx[3] : Tx[2], 50, 250, WHITE);
             DrawTexture(CheckBoxState[4] ? Tx[3] : Tx[2], 50, 300, WHITE);
-            DrawTexture(CheckBoxState[5] ? Tx[3] : Tx[2], 600, 100, WHITE);
-            DrawTexture(CheckBoxState[6] ? Tx[3] : Tx[2], 600, 150, WHITE);
-            DrawTexture(CheckBoxState[7] ? Tx[3] : Tx[2], 600, 200, WHITE);
-            DrawTexture(CheckBoxState[8] ? Tx[3] : Tx[2], 600, 250, WHITE);
-            DrawTexture(CheckBoxState[9] ? Tx[3] : Tx[2], 600, 300, WHITE);
+            DrawTexture(CheckBoxState[5] ? Tx[3] : Tx[2], 730, 100, WHITE);
+            DrawTexture(CheckBoxState[6] ? Tx[3] : Tx[2], 730, 150, WHITE);
+            DrawTexture(CheckBoxState[7] ? Tx[3] : Tx[2], 730, 200, WHITE);
+            DrawTexture(CheckBoxState[8] ? Tx[3] : Tx[2], 730, 250, WHITE);
+            DrawTexture(CheckBoxState[9] ? Tx[3] : Tx[2], 730, 300, WHITE);
             DrawTexture(Tx[4], 29, 482, WHITE);
             DrawTexture(Tx[4], 629, 482, WHITE);
             DrawTexture(Tx[4], 335, 482, WHITE);
+            DrawTextEx(font[5], "Add more APPs:", {300, 350}, 17, 3 , WHITE);
+            DrawTextEx(font[5], "Type the windowtitle of your app below", {150, 370}, 17, 3 , WHITE);
             if (GuiTextBox(CATextBox, TextMem, 64, TextBoxEditMode))
             {
                 TextBoxEditMode = !TextBoxEditMode;
@@ -417,14 +439,29 @@ int main()
             DrawTextEx(font[2], "LOCK", {654, 515}, 30, 3, BLACK);
             DrawTextEx(font[2], "CLEAR", {350, 515}, 30, 3, BLACK);
             DrawTextEx(font[4], "ADD", {455, 405}, 20, 2, BLACK);
+            DrawTexture(Tx[9], 45, 57, WHITE);
+            DrawTexture(Tx[10], 78, 140, WHITE);
+            DrawTexture(Tx[11], 78, 190, WHITE);
+            DrawTexture(Tx[12], 78, 240, WHITE);
+            DrawTexture(Tx[13], 78, 290, WHITE);
+            DrawTexture(Tx[14], 678, 90, WHITE);
+            DrawTexture(Tx[15], 678, 140, WHITE);
+            DrawTexture(Tx[16], 678, 190, WHITE);
+            DrawTexture(Tx[17], 678, 240, WHITE);
+            DrawTexture(Tx[18], 678, 290, WHITE);
         }
         if (usc == LOCK_INITIALIZED)
         {
             DrawTexture(Tx[6], 8, 6, WHITE);
+            DrawTexture(Tx[8], 30, 30, WHITE);
             if (lsc == LOCKED)
             {
                 DrawTexture(Tx[7], 309, 345, WHITE);
                 DrawTextEx(font[2], "UNLOCK", {336, 380}, 30, 3, BLACK);
+            }
+            if(lsc == UNLOCKED)
+            {
+                DrawTextEx(font[2], "BLOCKER UNLOCKED", {210, 380}, 30, 3, WHITE);
             }
         }
         EndDrawing();
